@@ -1,6 +1,7 @@
-# driverassistant
+# DriverAssistant
 
-A new Flutter project.
+A drowsiness detection app with flutter framework and ml kit's face detection API
+
 
 ## Getting Started
 
