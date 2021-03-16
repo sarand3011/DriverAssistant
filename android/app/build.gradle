@@ -64,6 +64,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision-common:19.1.2'
     implementation 'com.google.android.gms:play-services-vision-image-label:18.1.0'
     implementation 'com.google.firebase:firebase-analytics-ktx' 
-    implementation("com.android.support:support-v4:27.1.1")
-
+   
 }

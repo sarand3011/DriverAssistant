@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   _getImage() async {
-    final imageFile = await picker.getImage(source: ImageSource.gallery);
+    final imageFile = await picker.getImage(source: ImageSource.camera);
     setState(() {
       isLoading = true;
     });
@@ -106,7 +106,7 @@ class FacePainter extends CustomPainter {
   void paint(ui.Canvas canvas, ui.Size size) {
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
+      ..strokeWidth = 4.0
       ..color = Colors.yellow;
 
     canvas.drawImage(image, Offset.zero, Paint());
