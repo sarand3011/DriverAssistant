@@ -6,10 +6,11 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 //import 'package:driverassistant/driverassistant.dart';
+import 'package:driverassistant/Camera%20app.dart';
+import 'package:driverassistant/image_pickerapp.dart';
+import 'package:driverassistant/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:driverassistant/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
