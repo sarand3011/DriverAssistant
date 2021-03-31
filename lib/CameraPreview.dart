@@ -17,12 +17,14 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   bool _isDetecting = false;
   CameraLensDirection _direction = CameraLensDirection.back;
 
-  final FaceDetector _faceDetector = FirebaseVision.instance.faceDetector(FaceDetectorOptions(
-        mode: FaceDetectorMode.accurate,
-        enableLandmarks: true,
-        enableClassification: true,
-        enableTracking: true));
-  
+  final FaceDetector _faceDetector =
+      FirebaseVision.instance.faceDetector(FaceDetectorOptions(
+    mode: FaceDetectorMode.accurate,
+    enableLandmarks: true,
+    enableClassification: true,
+    // enableTracking: true
+  ));
+
   @override
   void initState() {
     super.initState();
@@ -35,8 +37,8 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
     setState(() {});
     _camera = CameraController(
       description,
-      defaultTargetPlatform == TargetPlatform.iOS
-          ? ResolutionPreset.high
+      defaultTargetPlatform == TargetPlatform.android
+          ? ResolutionPreset.veryHigh
           : ResolutionPreset.high,
     );
     await _camera.initialize().catchError((onError) => print(onError));
@@ -61,7 +63,7 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   }
 
   Widget _buildResults() {
-     Text noResultsText = Text('No Face detected yet!');
+    Text noResultsText = Text('No Face detected yet!');
 
     if (_scanResults == null ||
         _camera == null ||
@@ -101,6 +103,7 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
               children: <Widget>[
                 CameraPreview(_camera),
                 _buildResults(),
+                // Text(face)
               ],
             ),
     );
@@ -129,9 +132,9 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
       appBar: AppBar(
         title: Text(
           'Driver Assistant',
-        ), 
+        ),
         //?centerTitle: true,
-      ), 
+      ),
       drawer: MyDrawer(),
       body: _buildImage(),
       floatingActionButton: Row(
