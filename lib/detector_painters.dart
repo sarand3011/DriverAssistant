@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class FaceDetectorPainter extends CustomPainter {
   FaceDetectorPainter(this.absoluteImageSize, this.faces);
-
+  int colorInt = 1;
   final Size absoluteImageSize;
   final List<Face> faces;
   List<Color> colors = [
@@ -19,24 +19,32 @@ class FaceDetectorPainter extends CustomPainter {
     final double scaleX = size.width / absoluteImageSize.width;
     final double scaleY = size.height / absoluteImageSize.height;
 
-    final Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 4.0
-      ..color = colors[0];//Random().nextInt(5)];
-
     for (Face face in faces) {
-      canvas.drawRect(
-        Rect.fromLTRB(
-          face.boundingBox.left * scaleX,
-          face.boundingBox.top * scaleY,
-          face.boundingBox.right * scaleX ,
-          face.boundingBox.bottom * scaleY,
-        ),
-        paint,
-      ); 
+      double averageEyeOpenProb =
+          (face.leftEyeOpenProbability + face.rightEyeOpenProbability) / 2.0;
       print("hello");
-    print("lefteyeprob${face.leftEyeOpenProbability}"); 
-    print("righteyeprob${face.rightEyeOpenProbability}");
+      print("lefteyeprob${face.leftEyeOpenProbability}");
+      print("righteyeprob${face.rightEyeOpenProbability}");
+
+      print(averageEyeOpenProb);
+      if (averageEyeOpenProb < 0.6) {
+        print("Alert");
+        colorInt = 0;
+      } else {
+        colorInt = 1;
+      }
+
+      canvas.drawRect(
+          Rect.fromLTRB(
+            face.boundingBox.left * scaleX,
+            face.boundingBox.top * scaleY,
+            face.boundingBox.right * scaleX,
+            face.boundingBox.bottom * scaleY,
+          ),
+          Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 4.0
+            ..color = colors[colorInt]);
     }
   }
 
