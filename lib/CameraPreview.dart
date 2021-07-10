@@ -17,13 +17,14 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   bool _isDetecting = false;
   CameraLensDirection _direction = CameraLensDirection.back;
 
-  final FaceDetector _faceDetector =
-      FirebaseVision.instance.faceDetector(FaceDetectorOptions(
-    mode: FaceDetectorMode.accurate,
-    enableLandmarks: true,
-    enableClassification: true,
-    // enableTracking: true
-  ));
+  final FaceDetector _faceDetector = FirebaseVision.instance.faceDetector(
+      FaceDetectorOptions(
+          mode: FaceDetectorMode.accurate,
+          enableLandmarks: true,
+          enableClassification: true,
+          enableContours: true
+          // enableTracking: true
+          ));
 
   @override
   void initState() {
@@ -88,6 +89,7 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   Widget _buildImage() {
     return Container(
       constraints: BoxConstraints.expand(),
+      color: Colors.orange[200],
       child: _camera == null
           ? Center(
               child: Text(
@@ -98,13 +100,16 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
                 ),
               ),
             )
-          : Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                CameraPreview(_camera),
-                _buildResults(),
-                // Text(face)
-              ],
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  CameraPreview(_camera),
+                  _buildResults(),
+                  // Text(face)
+                ],
+              ),
             ),
     );
   }

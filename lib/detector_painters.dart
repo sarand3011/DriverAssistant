@@ -19,7 +19,11 @@ class FaceDetectorPainter extends CustomPainter {
     final double scaleX = size.width / absoluteImageSize.width;
     final double scaleY = size.height / absoluteImageSize.height;
 
-    for (Face face in faces) {
+    //for (Face face in faces) {
+    try {
+      // faces.sort()=>a.;
+      Face face = faces[0];
+
       double averageEyeOpenProb =
           (face.leftEyeOpenProbability + face.rightEyeOpenProbability) / 2.0;
       print("hello");
@@ -35,6 +39,7 @@ class FaceDetectorPainter extends CustomPainter {
       }
 
       canvas.drawRect(
+          // face.boundingBox,
           Rect.fromLTRB(
             face.boundingBox.left * scaleX,
             face.boundingBox.top * scaleY,
@@ -45,6 +50,8 @@ class FaceDetectorPainter extends CustomPainter {
             ..style = PaintingStyle.stroke
             ..strokeWidth = 4.0
             ..color = colors[colorInt]);
+    } catch (e) {
+      print("noFaceDetected");
     }
   }
 
